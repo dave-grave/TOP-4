@@ -1,4 +1,4 @@
-const container = document.querySelector(".container");
+const containerGrid = document.querySelector(".container-grid");
 
 function createGrid(numberOfSquares) {
     for (let i=0; i<numberOfSquares; i++) {
@@ -7,11 +7,27 @@ function createGrid(numberOfSquares) {
         square.addEventListener("mouseover", () => {
             square.setAttribute("style", "background: black;");
         });
-        container.appendChild(square);
+        containerGrid.appendChild(square);
     }
 }
 
+function resizeGrid(numberOfSquares) {
+    const sizeOfSquare = Math.floor(950 / numberOfSquares);
+    while (containerGrid.firstChild) {
+        containerGrid.removeChild(containerGrid.lastChild);
+    }
+    createGrid(numberOfSquares);
+}
+
+
+const resizeInput = document.querySelector("#resize-input");
+resizeInput.value = "enter a number 1-100...";
+
 const resizeButton = document.querySelector("#resize-button");
+resizeButton.addEventListener("click", () => {
+    resizeGrid(resizeInput.value);
+});
 
 createGrid(256);
+
 
